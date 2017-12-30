@@ -16,6 +16,7 @@
     "formidable": "^1.1.1",
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
-    "nodemon": "^1.14.1"
+    "nodemon": "^1.14.1",
+    "shortid": "^2.2.8"
   }
 }

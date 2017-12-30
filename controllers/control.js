@@ -20,19 +20,7 @@ module.exports = {
       msg: '登录成功',
       user: user
     })
-  },
-  index: async (req, res, next) => {
-    const users = await User.find({})
-    res.status(200).send(users)
-    
-    // user.find({})
-    //   .then(user => {
-    //     res.status(200).json(user)
-    //   })
-    //   .catch(err => {
-    //     next(err)
-    //   })
-  },
+  }
   
   /**
    * Callback
@@ -65,9 +53,9 @@ module.exports = {
   /**
    * async
    */
-  newuser: async (req, res, next) => {
-    const newuser = new User(req.body)
-    const adduser = await newuser.save()
-    res.status(200).json(adduser)
-  }
+  // newuser: async (req, res, next) => {
+  //   const newuser = new User(req.body)
+  //   const adduser = await newuser.save()
+  //   res.status(200).json(adduser)
+  // }
 }

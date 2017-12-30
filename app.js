@@ -7,7 +7,7 @@ const express = require('express')
 const logger = require('morgan')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-// connect mongodb
+// 连接数据库 mongodb
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/learn', {useMongoClient: true})
 const connection = mongoose.connection;  

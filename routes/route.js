@@ -3,12 +3,10 @@ const router = require('express-promise-router')()
 // const router = express.Router()
 
 const Controller = require('../controllers/control')
-
-router.route('/')
-  .get(Controller.index)
-  .post(Controller.newuser);
+// 注册
 router.route('/regin')
   .post(Controller.regin)
+// 登录
 router.route('/login')
   .get(Controller.login)
 module.exports = router
