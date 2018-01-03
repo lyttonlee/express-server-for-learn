@@ -22,6 +22,7 @@ connection.on('open', () => {
 
 // routes
 const route = require('./routes/route')
+const adminroute = require('./routes/adminroute')
 // app
 const app = express()
 
@@ -32,8 +33,10 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 
 // routes
-const base = ''
-app.use(base, route)
+const client = ''
+const admin = '/admin'
+app.use(client, route)
+app.use(admin, adminroute)
 
 
 // catch 404 err and then to err handler
@@ -56,6 +59,6 @@ app.use((err, req, res, next) => {
 // listen port
 const port = app.get('port') || 8088
 app.listen(port, () => {
-  console.log('your server are listening at localhost:'+ port)
+  console.log('your server are listening at localhost:' + port)
 })
 
