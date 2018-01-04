@@ -43,6 +43,7 @@ prodsSchema = new Schema({
   },
   name: String,
   price: Number,
+  image: String,
   desc: String,
   selling: Boolean,
   info: String

@@ -9,4 +9,8 @@ router.route('/regin')
 // 登录
 router.route('/login')
   .get(Controller.login)
+// 上传图片 
+router.route('/upload')
+  .post(Controller.upload)
+  .options(Controller.upload)
 module.exports = router

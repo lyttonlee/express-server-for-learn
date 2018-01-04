@@ -2,6 +2,7 @@
 const {User, Product} = require('../models/model')
 const formidable = require('formidable')
 const form = new formidable.IncomingForm()
+const path = require('path')
 
 module.exports = {
   // 注册
@@ -20,42 +21,17 @@ module.exports = {
       msg: '登录成功',
       user: user
     })
+  },
+  // 上传图片
+  upload: async (req, res, next) => {
+    //上传文件的保存路径
+    form.uploadDir = path.join(__dirname,'./upload')
+    //保存扩展名
+    form.keepExtensions = true
+    //上传文件的最大大小
+    form.maxFieldsSize = 20 * 1024 * 1024
+    form.parse(req, (err, fields, files) => {
+      console.log(files)
+    })
   }
-  
-  /**
-   * Callback
-   */
-  // newuser: (req, res, next) => {
-  //   const newuser = req.body
-  //   const adduser = new user(newuser)
-  //   adduser.save((err, user) => {
-  //     if (err) {
-  //       next(err)
-  //     } else {
-  //       res.status(200).json(newuser)
-  //     }
-  //   })
-  // }
-
-  /**
-   * Promise
-   */ 
-  // newuser: (req, res, next) => {
-  //   const newuser = req.body
-  //   const adduser = new user(newuser)
-  //   adduser.save().then(newuser => {
-  //       res.status(200).json(newuser)
-  //     }).catch(err => {
-  //       next(err)
-  //     })
-  // }
-
-  /**
-   * async
-   */
-  // newuser: async (req, res, next) => {
-  //   const newuser = new User(req.body)
-  //   const adduser = await newuser.save()
-  //   res.status(200).json(adduser)
-  // }
 }
