@@ -14,12 +14,14 @@ module.exports = {
         code: 500,
         msg: '用户名或密码错误'
       })
+      return
     } else {
       res.status(200).json({
         code: 200,
         msg: '登录成功',
         adminer: adminer
       })
+      return
     }
   },
   // 添加管理员
@@ -27,5 +29,6 @@ module.exports = {
     const newadminer = new Adminer(req.body)
     const addadminer = await newadminer.save()
     res.status(200).json(addadminer)
+    return
   }
 }

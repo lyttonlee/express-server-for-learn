@@ -7,6 +7,7 @@ const express = require('express')
 const logger = require('morgan')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+
 // 连接数据库 mongodb
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/learn', {useMongoClient: true})
@@ -20,6 +21,7 @@ connection.on('open', () => {
     console.log('opened MongoDB');  
 });  
 
+
 // routes
 const route = require('./routes/route')
 const adminroute = require('./routes/adminroute')
@@ -29,6 +31,9 @@ const app = express()
 // middlewares
 // 日志记录
 app.use(logger('dev'))
+// 访问静态资源
+// console.log(__dirname)
+app.use(express.static(__dirname + '/public/dist/'))
 // body-parser
 app.use(bodyParser.json())
 
