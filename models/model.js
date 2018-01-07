@@ -84,7 +84,7 @@ AdminerSchema = new Schema({
   password: String,
   avatar: {
     type: String,
-    'default': 'http://diy.qqjay.com/u2/2014/1027/4c67764ac08cd40a58ad039bc2283ac0.jpg'
+    'default': 'http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=2b4e25657a8b4710ce7af5c8f6feefcb/b90e7bec54e736d1bec1514c93504fc2d46269a0.jpg'
   },
   role: String
 })

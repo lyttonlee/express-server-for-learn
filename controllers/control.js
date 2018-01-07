@@ -33,14 +33,13 @@ module.exports = {
     form.keepExtensions = true
     //上传文件的最大大小
     form.maxFieldsSize = 20 * 1024 * 1024
-    const resParse = form.parse(req, (err, fields, files) => {
-      // 项目未打包时使用
-      let imagepath = 'http://localhost:8088/' + path.normalize(files.file.path)
-      res.status(200).send(imagepath)
+    form.parse(req, (err, fields, files) => {
+      // 项目未打包时dev使用
+      const imagepath = 'http://localhost:8088/' + path.normalize(files.file.path)
       // 项目打包到server之后使用
-      // const imagepath = await path.normalize(files.file.path)
+      // const imagepath = path.normalize(files.file.path)
+      res.status(200).send(imagepath)
     })
-    // return
     
   },
   // 发送文件
