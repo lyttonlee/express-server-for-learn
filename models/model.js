@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const shortid = require('shortid')
+const moment = require('moment')
 const Schema = mongoose.Schema
 // 用户
 UserSchema = new Schema({
@@ -15,7 +16,10 @@ UserSchema = new Schema({
     type: String,
     'default': 'http://diy.qqjay.com/u2/2014/1027/4c67764ac08cd40a58ad039bc2283ac0.jpg'
   },
-  date: Date,
+  date: {
+    type: String,
+    'default': moment(new Date()).format('YYYY-MM-DD')
+  },
   name: String
 })
 const User = mongoose.model('User', UserSchema)
@@ -67,6 +71,10 @@ sendsSchema = new Schema({
   sendprice: Number,
   sendcode: Number,
   sendstauts: String,
+  senddate: {
+    type: String,
+    'default': moment(new Date()).format('YYYY-MM-DD')
+  },
   sender: {
     type: Schema.Types.ObjectId,
     ref: 'User'
@@ -86,7 +94,11 @@ AdminerSchema = new Schema({
     type: String,
     'default': 'http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=2b4e25657a8b4710ce7af5c8f6feefcb/b90e7bec54e736d1bec1514c93504fc2d46269a0.jpg'
   },
-  role: String
+  role: String,
+  time: {
+    type: String,
+    'default': moment(new Date()).format('YYYY-MM-DD')
+  }
 })
 const Adminer = mongoose.model('Adminer', AdminerSchema)
 
