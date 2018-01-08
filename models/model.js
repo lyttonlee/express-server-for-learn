@@ -32,10 +32,7 @@ productsSchema = new Schema({
   },
   type: String,
   name: String,
-  prods: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Prods'
-  }]
+  sub: String
 })
 const Product = mongoose.model('Product', productsSchema)
 
@@ -50,7 +47,11 @@ prodsSchema = new Schema({
   image: String,
   desc: String,
   selling: Boolean,
-  info: String
+  info: String,
+  type: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  }
 })
 const Prods = mongoose.model('Prods', prodsSchema)
 

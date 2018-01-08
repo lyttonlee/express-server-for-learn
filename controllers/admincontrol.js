@@ -1,6 +1,6 @@
 
-const {Adminer} = require('../models/model')
-// const formidable = require('formidable')
+const {Adminer, Product, Prods} = require('../models/model')
+const formidable = require('formidable')
 
 module.exports = {
   // 管理员登录
@@ -62,5 +62,51 @@ module.exports = {
     const updateAdminer = await Adminer.findByIdAndUpdate(id, req.body, {new: true}).exec()
     // console.log(updateAdminer)
     res.status(200).send(updateAdminer)
+  },
+  // 添加商品类
+  newproducts: async (req, res, next) => {
+    const newproduct = new Product(req.body)
+    const addedproduct = await newproduct.save()
+    res.status(200).json({
+      msg: '添加商品分类成功',
+      newproduct: addedproduct
+    })
+  },
+  // 获取商品分类
+  getproducts: async (req, res, next) => {
+    if (req.query.type === 'all') {
+      const AllProductss = await Product.find()
+      res.status(200).json({
+        products: AllProductss
+      })
+    } else {
+      const CurProduct = await Product.find(req.query)
+      res.status(200).json(CurProduct)
+    }
+  },
+  // 修改商品分类
+  editproduct: async (req, res, next) => {
+    let {id} = req.body
+    const updateProduct = await Product.findByIdAndUpdate(id, req.body, {new: true}).exec()
+    res.status(200).json({
+      msg: '修改商品分类成功'
+    })
+  },
+  // 添加一个商品
+  newprod: async (req, res, next) => {
+    let {id, prod} = req.body
+    // console.log(id,prod)
+    // 新增加一个商品
+    const newProd = new Prods(prod)
+    // 找到该商品属于哪一个分类
+    const CurProduct = await Product.findById(id)
+    // 给这个新商品的type属性赋值
+    newProd.type = CurProduct
+    // 保存这个商品
+    await newProd.save()
+    res.status(200).json({
+      msg: '添加商品成功',
+      addprod: newProd
+    })
   }
 }

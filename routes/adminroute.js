@@ -14,4 +14,19 @@ router.route('/getadminer')
 // 修改管理员
 router.route('/editadminer')
   .post(AdminController.editadminer)
+// 添加商品类
+router.route('/newproducts')
+  .post(AdminController.newproducts)
+// 获取商品分类
+router.route('/getproducts')
+  .get(AdminController.getproducts)
+// 修改商品分类
+router.route('/editproduct')
+  .post(AdminController.editproduct)
+// 添加商品
+router.route('/newprod')
+  .post(AdminController.newprod)
+// 修改商品
+// router.route('/editprod')
+//   .post(AdminController.editprod)
 module.exports = router
