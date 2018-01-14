@@ -26,7 +26,10 @@ router.route('/editproduct')
 // 添加商品
 router.route('/newprod')
   .post(AdminController.newprod)
+// 获取所有商品
+router.route('/getprods')
+  .get(AdminController.getprods)
 // 修改商品
-// router.route('/editprod')
-//   .post(AdminController.editprod)
+router.route('/editprod')
+  .post(AdminController.editprod)
 module.exports = router

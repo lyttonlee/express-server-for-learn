@@ -49,9 +49,10 @@ prodsSchema = new Schema({
   selling: Boolean,
   info: String,
   type: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'Product'
-  }
+  },
+  typename: String
 })
 const Prods = mongoose.model('Prods', prodsSchema)
 
@@ -77,7 +78,7 @@ sendsSchema = new Schema({
     'default': moment(new Date()).format('YYYY-MM-DD')
   },
   sender: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'User'
   }
 })

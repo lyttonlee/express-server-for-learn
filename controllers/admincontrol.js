@@ -94,19 +94,43 @@ module.exports = {
   },
   // 添加一个商品
   newprod: async (req, res, next) => {
-    let {id, prod} = req.body
-    // console.log(id,prod)
-    // 新增加一个商品
-    const newProd = new Prods(prod)
-    // 找到该商品属于哪一个分类
-    const CurProduct = await Product.findById(id)
-    // 给这个新商品的type属性赋值
-    newProd.type = CurProduct
+    // 一种写法
+    // let {id, prod} = req.body
+    // // console.log(id,prod)
+    // // 新增加一个商品
+    // const newProd = new Prods(prod)
+    // // 找到该商品属于哪一个分类
+    // const CurProduct = await Product.findById(id)
+    // // 给这个新商品的type属性赋值
+    // newProd.type = CurProduct
+
+    // 另一种写法
+    const newProd = new Prods(req.body)
     // 保存这个商品
     await newProd.save()
     res.status(200).json({
       msg: '添加商品成功',
       addprod: newProd
     })
+  },
+  // 获取商品
+  getprods: async (req, res, next) => {
+    if (req.query.type === 'all') {
+      const AllProds = await Prods.find()
+      res.status(200).json({
+        prods: AllProds
+      })
+    } else {
+      const CurProd = await Prods.find(req.query)
+      res.status(200).json({
+        prods: CurProd
+      })
+    }
+  },
+  // 修改商品
+  editprod: async (req, res, next) => {
+    let {id} = req.body
+    const updateprod = await Prods.findByIdAndUpdate(id, req.body, {new: true}).exec()
+    res.status(200).send(updateprod)
   }
 }
