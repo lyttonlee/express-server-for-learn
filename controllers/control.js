@@ -1,4 +1,4 @@
-const {User, Product} = require('../models/model')
+const {User, Product, Sends} = require('../models/model')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
@@ -49,5 +49,34 @@ module.exports = {
     // console.log(curfile)   
     res.status(200).sendFile(curfile)
     return
+  },
+  // 新增待发货
+  newpresend: async (req, res, next) => {
+    const newsend = new Sends(req.body)
+    const addedsend = await newsend.save()
+    res.status(200).json({
+      newsend: newsend
+    })
+  },
+  // 删除某一条待发货记录
+  deletesend: async (req, res, next) => {
+    const deleteres = await Sends.remove(req.query)
+    res.status(200).json({
+      data: deleteres
+    })
+  },
+  // 获取个人待发货记录
+  getpresends: async (req, res, next) => {
+    const presends = await Sends.find(req.query)
+    res.status(200).json({
+      presends: presends
+    })
+  },
+  // 获取个人已发货记录
+  getsended: async (req, res, next) => {
+    const sended = await Sends.find(req.query)
+    res.status(200).json({
+      sended: sended
+    })
   }
 }

@@ -14,7 +14,7 @@ UserSchema = new Schema({
   tel: Number,
   avatar: {
     type: String,
-    'default': 'http://diy.qqjay.com/u2/2014/1027/4c67764ac08cd40a58ad039bc2283ac0.jpg'
+    'default': 'http://localhost:8088/upload/avatar-default.jpg'
   },
   date: {
     type: String,
