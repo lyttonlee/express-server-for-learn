@@ -24,7 +24,13 @@ router.route('/deletesend')
 // 个人待发货记录
 router.route('/presends')
   .get(Controller.getpresends)
+// 修改一条待发货记录
+router.route('/editsend')
+  .post(Controller.editsend)
 // 个人已发货记录
 router.route('/sended')
   .get(Controller.getsended)
+// 修改付款后发货单状态为正在发货
+router.route('/updatesends')
+  .post(Controller.updatesends)
 module.exports = router

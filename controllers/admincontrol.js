@@ -1,5 +1,4 @@
-
-const {Adminer, Product, Prods} = require('../models/model')
+const {Adminer, Product, Prods, User, Sends} = require('../models/model')
 const formidable = require('formidable')
 
 module.exports = {
@@ -116,12 +115,12 @@ module.exports = {
   // 获取商品
   getprods: async (req, res, next) => {
     if (req.query.type === 'all') {
-      const AllProds = await Prods.find()
+      const AllProds = await Prods.find().sort({_id: -1})
       res.status(200).json({
         prods: AllProds
       })
     } else {
-      const CurProd = await Prods.find(req.query)
+      const CurProd = await Prods.find(req.query).sort({_id: -1})
       res.status(200).json({
         prods: CurProd
       })
@@ -132,5 +131,59 @@ module.exports = {
     let {id} = req.body
     const updateprod = await Prods.findByIdAndUpdate(id, req.body, {new: true}).exec()
     res.status(200).send(updateprod)
+  },
+  // 获取用户
+  getusers: async (req, res, next) => {
+    if (req.query.type === 'all') {
+      const users = await User.find().sort({_id: -1})
+      res.status(200).json({
+        users: users
+      })
+    } else {
+      const CurUser = await User.find(req.query).sort({_id: -1})
+      res.status(200).json({
+        users: CurUser
+      })
+    }
+  },
+  // 获取用户发货量
+  getusersendnum: async (req, res, next) => {
+    // console.log(req.query)
+    let names = req.query.names
+    const nums = []
+    // console.log(names)
+    for (let i = 0; i < names.length; i++) {
+      const num = await Sends.find({sender: names[i]}).count()
+      // console.log(num)
+      nums.push(num)
+    }
+    res.status(200).json({
+      nums: nums
+    })
+  },
+  // 获取所有正在发货订单
+  sendsing: async (req, res, next) => {
+    const sendsing = await Sends.find({sendstatus: '正在发货'})
+    res.status(200).json({
+      sendsing: sendsing
+    })
+  },
+  // 更新订单状态
+  updatesends: async (req, res, next) => {
+    let {ids, sendstatus, sendcode} = req.body
+    console.log(ids, sendstatus)
+    for (let i = 0; i < ids.length; i++) {
+      await Sends.findByIdAndUpdate(ids[i],{sendstatus: sendstatus, sendcode: sendcode}).exec()
+    }
+    res.status(200).json({
+      msg: '已完成数据更新，请尽快组织发货！'
+    })
+  },
+  // 获取所有已发货订单
+  sendsed: async (req, res, next) => {
+    const sendsed = await Sends.find({sendstatus: '已发货'}).sort({_id: -1})
+    res.status(200).json({
+      sendsed: sendsed
+    })
   }
 }

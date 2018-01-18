@@ -60,23 +60,48 @@ module.exports = {
   },
   // 删除某一条待发货记录
   deletesend: async (req, res, next) => {
-    const deleteres = await Sends.remove(req.query)
+    let id = req.query
+    const deleteres = await Sends.findByIdAndRemove(id)
     res.status(200).json({
       data: deleteres
     })
   },
   // 获取个人待发货记录
   getpresends: async (req, res, next) => {
-    const presends = await Sends.find(req.query)
+    const presends = await Sends.find(req.query).sort({_id: -1})
     res.status(200).json({
       presends: presends
     })
   },
   // 获取个人已发货记录
   getsended: async (req, res, next) => {
-    const sended = await Sends.find(req.query)
+    // console.log(req.query)
+    let {sender, sendstatus} = req.query
+    // console.log(sender, sendstatus)
+    const sended = await Sends.find({sender: sender, sendstatus: {$ne: sendstatus}}).sort({_id: -1})
+    // console.log(sended)
     res.status(200).json({
       sended: sended
+    })
+  },
+  // 修改一条待发货记录
+  editsend: async (req, res, next) => {
+    let {_id} = req.body
+    const updatesend = await Sends.findByIdAndUpdate(_id, req.body, {new: true}).exec()
+    res.status(200).json({
+      msg: '修改发货信息成功',
+      uodatesend: updatesend
+    })
+  },
+  // 修改付款后发货单状态为正在发货
+  updatesends: async(req, res, next) => {
+    console.log(req.body)
+    let ids = req.body
+    for (let i = 0; i < ids.length; i++) {
+      await Sends.findByIdAndUpdate(ids[i],{sendstatus: '正在发货'}).exec()
+    }
+    res.status(200).json({
+      msg: '付款成功，正在进行包装发货！'
     })
   }
 }

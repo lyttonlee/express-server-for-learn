@@ -32,4 +32,19 @@ router.route('/getprods')
 // 修改商品
 router.route('/editprod')
   .post(AdminController.editprod)
+// 修改商品
+router.route('/getusers')
+  .get(AdminController.getusers)
+// 修改商品
+router.route('/sendunm')
+  .get(AdminController.getusersendnum)
+// 获取所有正在发货订单
+router.route('/sendsing')
+  .get(AdminController.sendsing)
+// 更新订单状态
+router.route('/updatesends')
+  .post(AdminController.updatesends)
+// 获取所有正在发货订单
+router.route('/sendsed')
+  .get(AdminController.sendsed)
 module.exports = router

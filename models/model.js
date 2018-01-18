@@ -18,7 +18,7 @@ UserSchema = new Schema({
   },
   date: {
     type: String,
-    'default': moment(new Date()).format('YYYY-MM-DD')
+    'default': moment(new Date()).format('YYYY-M-D')
   },
   name: String
 })
@@ -65,17 +65,21 @@ sendsSchema = new Schema({
   sendname: String,
   sendaddr: String,
   sendtel: Number,
-  recepname: String,
-  recepaddr: String,
-  receptel: Number,
+  recename: String,
+  receaddr: String,
+  recetel: Number,
   sendprod: String,
   sendmsg: String,
   sendprice: Number,
+  sendtype: {
+    type: String,
+    ref: 'Product'
+  },
   sendcode: Number,
-  sendstauts: String,
+  sendstatus: String,
   senddate: {
     type: String,
-    'default': moment(new Date()).format('YYYY-MM-DD')
+    'default': moment(new Date()).format('YYYY-M-D')
   },
   sender: {
     type: String,
@@ -99,7 +103,7 @@ AdminerSchema = new Schema({
   role: String,
   time: {
     type: String,
-    'default': moment(new Date()).format('YYYY-MM-DD')
+    'default': moment(new Date()).format('YYYY-M-D')
   }
 })
 const Adminer = mongoose.model('Adminer', AdminerSchema)
