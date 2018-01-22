@@ -1,4 +1,4 @@
-const {User, Product, Sends} = require('../models/model')
+const {User, Prods, Product, Sends} = require('../models/model')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
@@ -94,7 +94,7 @@ module.exports = {
     })
   },
   // 修改付款后发货单状态为正在发货
-  updatesends: async(req, res, next) => {
+  updatesends: async (req, res, next) => {
     console.log(req.body)
     let ids = req.body
     for (let i = 0; i < ids.length; i++) {
@@ -103,5 +103,11 @@ module.exports = {
     res.status(200).json({
       msg: '付款成功，正在进行包装发货！'
     })
+  },
+  // 获取某个商品
+  getprod: async (req, res, next) => {
+    console.log(req.query)
+    const CurProd = await Prods.findOne(req.query)
+    res.status(200).json(CurProd)
   }
 }

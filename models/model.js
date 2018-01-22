@@ -48,6 +48,11 @@ prodsSchema = new Schema({
   desc: String,
   selling: Boolean,
   info: String,
+  selltime: String,
+  sellnum: {
+    type: Number,
+    'default': 0
+  },
   type: {
     type: String,
     ref: 'Product'

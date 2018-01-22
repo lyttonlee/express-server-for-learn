@@ -33,4 +33,7 @@ router.route('/sended')
 // 修改付款后发货单状态为正在发货
 router.route('/updatesends')
   .post(Controller.updatesends)
+// 获取某个商品
+router.route('/getprod')
+  .get(Controller.getprod)
 module.exports = router
