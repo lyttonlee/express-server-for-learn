@@ -96,9 +96,10 @@ module.exports = {
   // 修改付款后发货单状态为正在发货
   updatesends: async (req, res, next) => {
     console.log(req.body)
-    let ids = req.body
-    for (let i = 0; i < ids.length; i++) {
-      await Sends.findByIdAndUpdate(ids[i],{sendstatus: '正在发货'}).exec()
+    let pars = req.body
+    for (let i = 0; i < pars.length; i++) {
+      await Sends.findByIdAndUpdate(pars[i].id,{sendstatus: '正在发货'}).exec()
+      await Prods.findOneAndUpdate({name: pars[i].name}, {$inc: {sellnum: 1}}).exec()
     }
     res.status(200).json({
       msg: '付款成功，正在进行包装发货！'
