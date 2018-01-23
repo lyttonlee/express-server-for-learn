@@ -95,7 +95,7 @@ module.exports = {
   },
   // 修改付款后发货单状态为正在发货
   updatesends: async (req, res, next) => {
-    console.log(req.body)
+    // console.log(req.body)
     let pars = req.body
     for (let i = 0; i < pars.length; i++) {
       await Sends.findByIdAndUpdate(pars[i].id,{sendstatus: '正在发货'}).exec()
@@ -107,8 +107,17 @@ module.exports = {
   },
   // 获取某个商品
   getprod: async (req, res, next) => {
-    console.log(req.query)
+    // console.log(req.query)
     const CurProd = await Prods.findOne(req.query)
+    res.status(200).json(CurProd)
+  },
+  // 搜索商品
+  serchprod: async (req, res, next) => {
+    // console.log(req.query.name)
+    let par = req.query.name
+    let regex = new RegExp(par)
+    const CurProd = await Prods.find({name: regex})
+    // console.log(CurProd)
     res.status(200).json(CurProd)
   }
 }

@@ -36,4 +36,7 @@ router.route('/updatesends')
 // 获取某个商品
 router.route('/getprod')
   .get(Controller.getprod)
+// 搜索商品
+router.route('/search')
+  .get(Controller.serchprod)
 module.exports = router
