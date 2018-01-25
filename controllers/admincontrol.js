@@ -163,7 +163,7 @@ module.exports = {
   },
   // 获取所有正在发货订单
   sendsing: async (req, res, next) => {
-    const sendsing = await Sends.find({sendstatus: '正在发货'})
+    const sendsing = await Sends.find(req.query)
     res.status(200).json({
       sendsing: sendsing
     })
