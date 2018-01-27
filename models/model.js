@@ -113,10 +113,56 @@ AdminerSchema = new Schema({
 })
 const Adminer = mongoose.model('Adminer', AdminerSchema)
 
+// 首页about
+AboutSchema = new Schema({
+  _id: {
+    type: String,
+    'default': shortid.generate
+  },
+  title: String,
+  subtext: String,
+  img: String
+})
+const About = mongoose.model('About', AboutSchema)
+// site option
+OptionSchema = new Schema({
+  _id: {
+    type: String,
+    'default': shortid.generate
+  },
+  sitename: {
+    type: String,
+    'default': '大凉山一品源'
+  },
+  banner: String,
+  beian: String,
+  erweima: String,
+  logo: String
+})
+const SiteOption = mongoose.model('SiteOption', OptionSchema)
+// 热点动态
+NewsSchema = new Schema({
+  _id: {
+    type: String,
+    'default': shortid.generate
+  },
+  title: String,
+  img: String,
+  author: String,
+  date: {
+    type: String,
+    'default': moment(new Date()).format('YYYY-M-D')
+  },
+  info: String
+})
+const News = mongoose.model('News', NewsSchema)
 module.exports = {
   User,
   Product,
   Prods,
   Sends,
-  Adminer
+  Adminer,
+  About,
+  SiteOption,
+  News
 }

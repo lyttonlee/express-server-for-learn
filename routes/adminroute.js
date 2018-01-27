@@ -47,4 +47,9 @@ router.route('/updatesends')
 // 获取所有正在发货订单
 router.route('/sendsed')
   .get(AdminController.sendsed)
+// 网站设置
+router.route('/siteoption')
+  .put(AdminController.setoption)
+  .get(AdminController.getoption)
+  .post(AdminController.newoption)
 module.exports = router

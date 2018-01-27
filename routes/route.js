@@ -39,4 +39,7 @@ router.route('/getprod')
 // 搜索商品
 router.route('/search')
   .get(Controller.serchprod)
+// 首页初始化
+router.route('/')
+  .get(Controller.init)
 module.exports = router

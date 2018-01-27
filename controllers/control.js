@@ -119,5 +119,11 @@ module.exports = {
     const CurProd = await Prods.find({name: regex})
     // console.log(CurProd)
     res.status(200).json(CurProd)
+  },
+  // 首页初始化
+  init: async (req, res, next) => {
+    res.status(200).json({
+      msg: 'init'
+    })
   }
 }

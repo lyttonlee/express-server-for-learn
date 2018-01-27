@@ -1,4 +1,4 @@
-const {Adminer, Product, Prods, User, Sends} = require('../models/model')
+const {Adminer, Product, Prods, User, Sends, SiteOption} = require('../models/model')
 const formidable = require('formidable')
 
 module.exports = {
@@ -184,6 +184,30 @@ module.exports = {
     const sendsed = await Sends.find({sendstatus: '已发货'}).sort({_id: -1})
     res.status(200).json({
       sendsed: sendsed
+    })
+  },
+  // 更新网站设置
+  setoption: async (req, res, next) => {
+    let id = req.body.id
+    const option = await SiteOption.findByIdAndUpdate(id, req.body).exec()
+    res.status(200).json({
+      msg: '网站设置更新成功！',
+      Option: option
+    })
+  },
+  // 获取网站设置
+  getoption: async (req, res, next) => {
+    const option = await SiteOption.find()
+    res.status(200).json({
+      Option: option
+    })
+  },
+  // 创建网站设置
+  newoption: async (req, res, next) => {
+    const newoption = new SiteOption(req.body)
+    const option = await newoption.save()
+    res.status(200).json({
+      Option: option
     })
   }
 }
