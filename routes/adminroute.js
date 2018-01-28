@@ -52,4 +52,10 @@ router.route('/siteoption')
   .put(AdminController.setoption)
   .get(AdminController.getoption)
   .post(AdminController.newoption)
+// 关于我们
+router.route('/about')
+  .put(AdminController.editabout)
+  .get(AdminController.getabout)
+  .post(AdminController.newabout)
+  .delete(AdminController.deleteabout)
 module.exports = router

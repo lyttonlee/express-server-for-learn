@@ -1,4 +1,4 @@
-const {Adminer, Product, Prods, User, Sends, SiteOption} = require('../models/model')
+const {Adminer, Product, Prods, User, Sends, SiteOption, About} = require('../models/model')
 const formidable = require('formidable')
 
 module.exports = {
@@ -209,5 +209,34 @@ module.exports = {
     res.status(200).json({
       Option: option
     })
+  },
+  // 新增关于我们
+  newabout: async (req, res, next) => {
+    const newabout = new About(req.body)
+    await newabout.save()
+    res.status(200).json({
+      msg: '新增关于我们成功！'
+    })
+  },
+  // 修改关于我们
+  editabout: async (req, res, next) => {
+    let id = req.body.id
+    await About.findByIdAndUpdate(id, req.body).exec()
+    res.status(200).json({
+      msg: '修改成功！'
+    })
+  },
+  // 删除关于我们
+  deleteabout: async (req, res, next) => {
+    let id = req.query.id
+    await About.findByIdAndRemove(id)
+    res.status(200).json({
+      msg: '删除成功！'
+    })
+  },
+  // 获取关于我们
+  getabout: async (req, res, next) => {
+    const about = await About.find(req.query)
+    res.status(200).json(about)
   }
 }
