@@ -148,7 +148,10 @@ NewsSchema = new Schema({
   },
   title: String,
   img: String,
-  author: String,
+  author: {
+    type: String,
+    'default': '大凉山一品源'
+  },
   date: {
     type: String,
     'default': moment(new Date()).format('YYYY-M-D')

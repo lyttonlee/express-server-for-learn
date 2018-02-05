@@ -1,4 +1,4 @@
-const {Adminer, Product, Prods, User, Sends, SiteOption, About} = require('../models/model')
+const {Adminer, Product, Prods, User, Sends, SiteOption, About, News} = require('../models/model')
 const formidable = require('formidable')
 
 module.exports = {
@@ -238,5 +238,29 @@ module.exports = {
   getabout: async (req, res, next) => {
     const about = await About.find(req.query)
     res.status(200).json(about)
+  },
+  // 添加新闻
+  addnews: async (req, res, next) => {
+    const newnews = new News(req.body)
+    const news = await newnews.save()
+    res.status(200).json({
+      msg: '添加新闻成功！'
+    })
+  },
+  // 修改新闻
+  editnews: async (req, res, next) => {
+    const id = req.body.id
+    await News.findByIdAndUpdate(id, req.body).exec()
+    res.status(200).json({
+      msg: '修改新闻成功！'
+    })
+  },
+  // 获取新闻
+  getnews: async (req, res, next) => {
+    let limit = parseInt(req.query.limit)
+    let query = req.query.params
+    console.log(req.query)
+    const news = await News.find(query).sort({'_id': 1}).limit(limit).exec()
+    res.status(200).json(news)
   }
 }

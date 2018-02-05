@@ -58,4 +58,9 @@ router.route('/about')
   .get(AdminController.getabout)
   .post(AdminController.newabout)
   .delete(AdminController.deleteabout)
+// 新闻管理
+router.route('/news')
+  .put(AdminController.editnews)
+  .get(AdminController.getnews)
+  .post(AdminController.addnews)
 module.exports = router

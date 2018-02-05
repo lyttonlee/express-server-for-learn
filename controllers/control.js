@@ -16,12 +16,18 @@ module.exports = {
   // 登录
   login: async (req, res, next) => {
     const user = await User.findOne(req.query)
-    res.status(200).json({
-      code: 200,
-      msg: '登录成功',
-      user: user
-    })
-    return
+    if (user) {
+      res.status(200).json({
+        code: 200,
+        msg: '登录成功',
+        user: user
+      })
+    } else {
+      res.status(200).json({
+        msg: '账号或密码错误！',
+        code: 500
+      })
+    }
   },
   // 上传图片
   upload: (req, res, next) => {
