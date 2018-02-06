@@ -63,4 +63,9 @@ router.route('/news')
   .put(AdminController.editnews)
   .get(AdminController.getnews)
   .post(AdminController.addnews)
+// 帮助文档管理
+router.route('/faq')
+  .put(AdminController.editfaq)
+  .get(AdminController.getfaq)
+  .post(AdminController.addfaq)
 module.exports = router

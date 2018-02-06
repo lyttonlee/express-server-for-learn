@@ -159,6 +159,20 @@ NewsSchema = new Schema({
   info: String
 })
 const News = mongoose.model('News', NewsSchema)
+// 帮助文档
+FAQSchema = new Schema({
+  _id: {
+    type: String,
+    'default': shortid.generate
+  },
+  que: String,
+  ans: String,
+  date: {
+    type: String,
+    'default': moment(new Date()).format('YYYY-M-D')
+  }
+})
+const FAQ = mongoose.model('FAQ', FAQSchema)
 module.exports = {
   User,
   Product,
@@ -167,5 +181,6 @@ module.exports = {
   Adminer,
   About,
   SiteOption,
-  News
+  News,
+  FAQ
 }
