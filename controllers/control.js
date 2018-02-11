@@ -2,6 +2,7 @@ const {User, Prods, Product, Sends} = require('../models/model')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
+const qiniu = require('qiniu')
 
 module.exports = {
   // 注册
@@ -41,9 +42,13 @@ module.exports = {
     form.maxFieldsSize = 20 * 1024 * 1024
     form.parse(req, (err, fields, files) => {
       // 项目未打包时dev使用
+      console.log(files)
       const imagepath = 'http://localhost:8088/' + path.normalize(files.file.path)
+
       // 项目打包到server之后使用
       // const imagepath = path.normalize(files.file.path)
+
+      // 上传至七牛云
       res.status(200).send(imagepath)
     })
     
@@ -52,7 +57,7 @@ module.exports = {
   sendfile: async (req, res, next) => {
     // console.log(req.params)
     const curfile = await path.resolve(__dirname,'../upload/' + req.params.imagename)
-    // console.log(curfile)   
+    // console.log(curfile) 
     res.status(200).sendFile(curfile)
     return
   },
