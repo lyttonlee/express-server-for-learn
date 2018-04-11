@@ -49,6 +49,40 @@ module.exports = {
       // const imagepath = path.normalize(files.file.path)
 
       // 上传至七牛云
+      
+      // const qiniu = require("qiniu");
+      // //需要填写你的 Access Key 和 Secret Key
+      // qiniu.conf.ACCESS_KEY = 'YOXpF0XvM_3yVDsz5C-hWwrFE5rtDAUQC3XjBQEG';
+      // qiniu.conf.SECRET_KEY = 'CmrhUV2xHf1d8nPCsws9wwm7jKypCPA0lRVm-7lS';
+      // //要上传的空间
+      // bucket = 'lytton';
+      // //上传到七牛后保存的文件名
+      // key = files.file.name;
+      // //构建上传策略函数
+      // function uptoken(bucket, key) {
+      //   var putPolicy = new qiniu.rs.PutPolicy(bucket+":"+key);
+      //   return putPolicy.token();
+      // }
+      // //生成上传 Token
+      // token = uptoken(bucket, key);
+      // //要上传文件的本地路径
+      // filePath = path.normalize(files.file.path)
+      // //构造上传函数
+      // function uploadFile(uptoken, key, localFile) {
+      //   var extra = new qiniu.io.PutExtra();
+      //     qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
+      //       if(!err) {
+      //         // 上传成功， 处理返回值
+      //         console.log(ret.hash, ret.key, ret.persistentId);       
+      //       } else {
+      //         // 上传失败， 处理返回代码
+      //         console.log(err);
+      //       }
+      //   });
+      // }
+      // //调用uploadFile上传
+      // uploadFile(token, key, filePath);
+
       res.status(200).send(imagepath)
     })
     
@@ -57,9 +91,8 @@ module.exports = {
   sendfile: async (req, res, next) => {
     // console.log(req.params)
     const curfile = await path.resolve(__dirname,'../upload/' + req.params.imagename)
-    // console.log(curfile) 
+    // console.log(curfile)
     res.status(200).sendFile(curfile)
-    return
   },
   // 新增待发货
   newpresend: async (req, res, next) => {
