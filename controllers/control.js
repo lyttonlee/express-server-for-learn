@@ -2,7 +2,7 @@ const {User, Prods, Product, Sends} = require('../models/model')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
-const qiniu = require('qiniu')
+const {uploadToken, qnupurl, domain} = require('../utils/qiniu')
 
 module.exports = {
   // 注册
@@ -30,6 +30,13 @@ module.exports = {
       })
     }
   },
+  gettoken: (req, res, next) => {
+    res.status(200).json({
+      token: uploadToken,
+      domain: domain,
+      upUrl: qnupurl
+    })
+  },
   // 上传图片
   upload: (req, res, next) => {
     // 实例化formidadle
@@ -44,45 +51,6 @@ module.exports = {
       // 项目未打包时dev使用
       console.log(files)
       const imagepath = 'http://localhost:8088/' + path.normalize(files.file.path)
-
-      // 项目打包到server之后使用
-      // const imagepath = path.normalize(files.file.path)
-
-      // 上传至七牛云
-      
-      // const qiniu = require("qiniu");
-      // //需要填写你的 Access Key 和 Secret Key
-      // qiniu.conf.ACCESS_KEY = 'YOXpF0XvM_3yVDsz5C-hWwrFE5rtDAUQC3XjBQEG';
-      // qiniu.conf.SECRET_KEY = 'CmrhUV2xHf1d8nPCsws9wwm7jKypCPA0lRVm-7lS';
-      // //要上传的空间
-      // bucket = 'lytton';
-      // //上传到七牛后保存的文件名
-      // key = files.file.name;
-      // //构建上传策略函数
-      // function uptoken(bucket, key) {
-      //   var putPolicy = new qiniu.rs.PutPolicy(bucket+":"+key);
-      //   return putPolicy.token();
-      // }
-      // //生成上传 Token
-      // token = uptoken(bucket, key);
-      // //要上传文件的本地路径
-      // filePath = path.normalize(files.file.path)
-      // //构造上传函数
-      // function uploadFile(uptoken, key, localFile) {
-      //   var extra = new qiniu.io.PutExtra();
-      //     qiniu.io.putFile(uptoken, key, localFile, extra, function(err, ret) {
-      //       if(!err) {
-      //         // 上传成功， 处理返回值
-      //         console.log(ret.hash, ret.key, ret.persistentId);       
-      //       } else {
-      //         // 上传失败， 处理返回代码
-      //         console.log(err);
-      //       }
-      //   });
-      // }
-      // //调用uploadFile上传
-      // uploadFile(token, key, filePath);
-
       res.status(200).send(imagepath)
     })
     

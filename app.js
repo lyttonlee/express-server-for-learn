@@ -11,15 +11,15 @@ const bodyParser = require('body-parser')
 // 连接数据库 mongodb
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://localhost/learn', {useMongoClient: true})
-const connection = mongoose.connection;  
+const connection = mongoose.connection 
 connection.on('error',err => {  
-    if(err){  
-        console.log(err);  
-    }  
-});  
+  if(err){  
+    console.log(err);  
+  }
+})
 connection.on('open', () => {  
-    console.log('opened MongoDB');  
-});  
+  console.log('opened MongoDB')
+})
 
 
 // routes
@@ -64,6 +64,7 @@ app.use((err, req, res, next) => {
 // listen port
 const port = app.get('port') || 8088
 app.listen(port, () => {
+  // console.log(err)
   console.log('your server are listening at localhost:' + port)
 })
 

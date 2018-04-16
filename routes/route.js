@@ -9,6 +9,9 @@ router.route('/regin')
 // 登录
 router.route('/login')
   .get(Controller.login)
+// 获取上传七牛云Token
+router.route('/gettoken')
+  .get(Controller.gettoken)
 // 上传图片
 router.route('/upload')
   .post(Controller.upload)
