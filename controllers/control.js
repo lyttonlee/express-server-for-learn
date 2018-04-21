@@ -14,6 +14,23 @@ module.exports = {
     })
     return
   },
+  // 检测用户是否已经被注册
+  hasReginedUser: async (req, res, next) => {
+    const userName = req.query
+    console.log(req.query)
+    const hasRegined = await User.findOne(userName)
+    if (!hasRegined) {
+      res.status(200).json({
+        hasRegined: false,
+        msg: '该用户尚未注册!'
+      })
+    } else {
+      res.status(200).json({
+        hasRegined: true,
+        msg: '该用户已被注册!'
+      })
+    }
+  },
   // 登录
   login: async (req, res, next) => {
     const user = await User.findOne(req.query)

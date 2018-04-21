@@ -14,7 +14,7 @@ UserSchema = new Schema({
   tel: Number,
   avatar: {
     type: String,
-    'default': 'http://localhost:8088/upload/avatar-default.jpg'
+    'default': 'http://p79iy6oha.bkt.clouddn.com/2018/04/17-14:17:15-consignment-22.png'
   },
   date: {
     type: String,
@@ -103,7 +103,7 @@ AdminerSchema = new Schema({
   password: String,
   avatar: {
     type: String,
-    'default': 'http://b.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=2b4e25657a8b4710ce7af5c8f6feefcb/b90e7bec54e736d1bec1514c93504fc2d46269a0.jpg'
+    'default': 'http://p79iy6oha.bkt.clouddn.com/aa64034f78f0f73660735fca0855b319eac4136f.jpg'
   },
   role: String,
   time: {

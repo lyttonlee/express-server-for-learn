@@ -65,6 +65,6 @@ app.use((err, req, res, next) => {
 const port = app.get('port') || 8088
 app.listen(port, () => {
   // console.log(err)
-  console.log('your server are listening at localhost:' + port)
+  console.log('your server are listening on port:' + port)
 })
 

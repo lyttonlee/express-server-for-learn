@@ -23,6 +23,23 @@ module.exports = {
       return
     }
   },
+  // 检测管理员是否已经被注册
+  hasReginedAdmin: async (req, res, next) => {
+    const adminName = req.query
+    console.log(req.query)
+    const hasRegined = await Adminer.findOne(adminName)
+    if (hasRegined === null) {
+      res.status(200).json({
+        hasRegined: false,
+        msg: '该管理员名称尚未注册!'
+      })
+    } else {
+      res.status(200).json({
+        hasRegined: true,
+        msg: '该管理员已被注册!'
+      })
+    }
+  },
   // 添加管理员
   addadminer: async (req, res, next) => {
     const newadminer = new Adminer(req.body)

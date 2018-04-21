@@ -6,6 +6,9 @@ const Controller = require('../controllers/control')
 // 注册
 router.route('/regin')
   .post(Controller.regin)
+// 用户名是否已被注册
+router.route('/hasregined')
+  .get(Controller.hasReginedUser)
 // 登录
 router.route('/login')
   .get(Controller.login)

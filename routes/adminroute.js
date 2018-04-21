@@ -5,6 +5,9 @@ const AdminController = require('../controllers/admincontrol')
 // 管理员登录
 router.route('/login')
   .get(AdminController.login)
+// 检测管理员是否被注册
+router.route('/hasregined')
+  .get(AdminController.hasReginedAdmin)
 // 添加管理员
 router.route('/newadminer')
   .post(AdminController.addadminer)
