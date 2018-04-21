@@ -33,7 +33,7 @@ const app = express()
 app.use(logger('dev'))
 // 访问静态资源
 // console.log(__dirname)
-app.use(express.static(__dirname + '/public/dist/'))
+app.use(express.static(__dirname + '/public/'))
 // body-parser
 app.use(bodyParser.json())
 
