@@ -11,6 +11,9 @@ router.route('/hasregined')
 // 添加管理员
 router.route('/newadminer')
   .post(AdminController.addadminer)
+// 删除管理员
+router.route('/deleteadminer')
+  .delete(AdminController.deleteadminer)
 // 获取管理员
 router.route('/getadminer')
   .get(AdminController.getadminer)

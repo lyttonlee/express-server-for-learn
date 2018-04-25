@@ -40,6 +40,14 @@ module.exports = {
       })
     }
   },
+  // 删除管理员
+  deleteadminer: async (req, res, next) => {
+    let id = req.query.id
+    await Adminer.findByIdAndRemove(id)
+    res.status(200).json({
+      msg: '删除成功！'
+    })
+  },
   // 添加管理员
   addadminer: async (req, res, next) => {
     const newadminer = new Adminer(req.body)
