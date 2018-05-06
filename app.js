@@ -38,8 +38,8 @@ app.use(express.static(__dirname + '/public/'))
 app.use(bodyParser.json())
 
 // routes
-const client = ''
-const admin = '/admin'
+const client = '/api'
+const admin = '/api/admin'
 app.use(client, route)
 app.use(admin, adminroute)
 
@@ -62,7 +62,9 @@ app.use((err, req, res, next) => {
   console.error(err)
 })
 // listen port
-const port = app.get('port') || 8088
+const serverPort = 80
+// const serverPort = 8088
+const port = serverPort
 app.listen(port, () => {
   // console.log(err)
   console.log('your server are listening on port:' + port)
