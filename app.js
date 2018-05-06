@@ -62,8 +62,7 @@ app.use((err, req, res, next) => {
   console.error(err)
 })
 // listen port
-const serverPort = 80
-// const serverPort = 8088
+const serverPort = 8088
 const port = serverPort
 app.listen(port, () => {
   // console.log(err)
