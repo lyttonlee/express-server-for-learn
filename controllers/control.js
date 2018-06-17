@@ -1,4 +1,4 @@
-const {User, Prods, Product, Sends} = require('../models/model')
+const {User, Prods, Product, Sends, LocalProd} = require('../models/model')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
@@ -78,6 +78,13 @@ module.exports = {
     const curfile = await path.resolve(__dirname,'../upload/' + req.params.imagename)
     // console.log(curfile)
     res.status(200).sendFile(curfile)
+  },
+  // 获取批发商品列表
+  getLocalprods: async (req, res, next) => {
+    const {limit, skip, order} = req.query
+    console.log(req.query)
+    const result = await LocalProd.find().sort(JSON.parse(order)).limit(parseInt(limit)).skip(skip * limit).exec()
+    res.status(200).json(result)
   },
   // 新增待发货
   newpresend: async (req, res, next) => {

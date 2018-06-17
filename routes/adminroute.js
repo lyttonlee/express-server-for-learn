@@ -1,7 +1,7 @@
 const router = require('express-promise-router')()
 
 const AdminController = require('../controllers/admincontrol')
-
+const {schemas, validate} = require('../utils/validate')
 // 管理员登录
 router.route('/login')
   .get(AdminController.login)
@@ -38,10 +38,17 @@ router.route('/getprods')
 // 修改商品
 router.route('/editprod')
   .post(AdminController.editprod)
-// 修改商品
+
+// 批发商品
+router.route('/localprod')
+// 添加
+  .post(validate.validateBody(schemas.newLocalprod), AdminController.newLocalProd)
+  .get(AdminController.getlocalprod)
+  .put(validate.validateBody(schemas.editLocalprod), AdminController.editLocalprod)
+// 获取用户
 router.route('/getusers')
   .get(AdminController.getusers)
-// 修改商品
+// 修改用户发货数量
 router.route('/sendunm')
   .get(AdminController.getusersendnum)
 // 获取所有正在发货订单

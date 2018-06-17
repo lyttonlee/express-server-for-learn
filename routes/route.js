@@ -39,6 +39,9 @@ router.route('/sended')
 // 修改付款后发货单状态为正在发货
 router.route('/updatesends')
   .post(Controller.updatesends)
+// 获取批发商品列表
+router.route('/querylocalprods')
+  .get(Controller.getLocalprods)
 // 获取某个商品
 router.route('/getprod')
   .get(Controller.getprod)

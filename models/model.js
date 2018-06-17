@@ -3,11 +3,7 @@ const shortid = require('shortid')
 const moment = require('moment')
 const Schema = mongoose.Schema
 // 用户
-UserSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const UserSchema = new Schema({
   username: String,
   password: String,
   email: String,
@@ -25,11 +21,7 @@ UserSchema = new Schema({
 const User = mongoose.model('User', UserSchema)
 
 // 商品类
-productsSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const productsSchema = new Schema({
   type: String,
   name: String,
   sub: String
@@ -37,11 +29,7 @@ productsSchema = new Schema({
 const Product = mongoose.model('Product', productsSchema)
 
 // 商品详细
-prodsSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const prodsSchema = new Schema({
   name: String,
   price: Number,
   image: String,
@@ -61,12 +49,22 @@ prodsSchema = new Schema({
 })
 const Prods = mongoose.model('Prods', prodsSchema)
 
+// 本地批发商品
+const localprodsSchema = new Schema({
+  name: String,
+  price: Number,
+  image: String,
+  desc: String,
+  info: String,
+  sellnum: {
+    type: Number,
+    'default': 0
+  }
+})
+const LocalProd = mongoose.model('LocalProd', localprodsSchema)
+
 // 用户发货
-sendsSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const sendsSchema = new Schema({
   sendname: String,
   sendaddr: String,
   sendtel: Number,
@@ -94,11 +92,7 @@ sendsSchema = new Schema({
 const Sends = mongoose.model('Sends', sendsSchema)
 
 // 管理员用户
-AdminerSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const AdminerSchema = new Schema({
   name: String,
   password: String,
   avatar: {
@@ -114,25 +108,17 @@ AdminerSchema = new Schema({
 const Adminer = mongoose.model('Adminer', AdminerSchema)
 
 // 首页about
-AboutSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const AboutSchema = new Schema({
   title: String,
   subtext: String,
   img: String
 })
 const About = mongoose.model('About', AboutSchema)
 // site option
-OptionSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const OptionSchema = new Schema({
   sitename: {
     type: String,
-    'default': '大凉山一品源'
+    'default': '辰农优品'
   },
   banner: String,
   beian: String,
@@ -141,16 +127,12 @@ OptionSchema = new Schema({
 })
 const SiteOption = mongoose.model('SiteOption', OptionSchema)
 // 热点动态
-NewsSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const NewsSchema = new Schema({
   title: String,
   img: String,
   author: {
     type: String,
-    'default': '大凉山一品源'
+    'default': '辰农优品'
   },
   date: {
     type: String,
@@ -160,11 +142,7 @@ NewsSchema = new Schema({
 })
 const News = mongoose.model('News', NewsSchema)
 // 帮助文档
-FAQSchema = new Schema({
-  _id: {
-    type: String,
-    'default': shortid.generate
-  },
+const FAQSchema = new Schema({
   que: String,
   ans: String,
   date: {
@@ -182,5 +160,6 @@ module.exports = {
   About,
   SiteOption,
   News,
-  FAQ
+  FAQ,
+  LocalProd
 }

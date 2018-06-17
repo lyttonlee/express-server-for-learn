@@ -1,6 +1,6 @@
 
-const {Adminer, Product, Prods, User, Sends, SiteOption, About, News, FAQ} = require('../models/model')
-const formidable = require('formidable')
+const {Adminer, Product, Prods, User, Sends, SiteOption, About, News, FAQ, LocalProd} = require('../models/model')
+// const formidable = require('formidable')
 
 module.exports = {
   // 管理员登录
@@ -157,6 +157,23 @@ module.exports = {
     let {id} = req.body
     const updateprod = await Prods.findByIdAndUpdate(id, req.body, {new: true}).exec()
     res.status(200).send(updateprod)
+  },
+  // 添加一个批发商品
+  newLocalProd: async (req, res, next) => {
+    const newProd = new LocalProd(req.value.body)
+    const result = await newProd.save()
+    res.status(200).json(result)
+  },
+  // 获取全部批发商品
+  getlocalprod: async (req, res, next) => {
+    const localProds = await LocalProd.find()
+    res.status(200).json(localProds)
+  },
+  // 修改批发商品
+  editLocalprod: async (req, res, next) => {
+    const {id} = req.value.body
+    const result = await LocalProd.findByIdAndUpdate(id, req.value.body, {new: true}).exec()
+    res.status(200).json(result)
   },
   // 获取用户
   getusers: async (req, res, next) => {
