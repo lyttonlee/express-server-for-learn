@@ -1,7 +1,5 @@
-const express = require('express')
 const router = require('express-promise-router')()
-// const router = express.Router()
-
+const {validate, schemas} = require('../utils/validate')
 const Controller = require('../controllers/control')
 // 注册
 router.route('/regin')
@@ -42,6 +40,9 @@ router.route('/updatesends')
 // 获取批发商品列表
 router.route('/querylocalprods')
   .get(Controller.getLocalprods)
+// 获取一个批发商品
+router.route('/cullocalprod')
+  .get(validate.validateParam(schemas.idQuery), Controller.culLocalProd)
 // 获取某个商品
 router.route('/getprod')
   .get(Controller.getprod)

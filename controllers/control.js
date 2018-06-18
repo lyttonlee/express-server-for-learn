@@ -1,8 +1,9 @@
 const {User, Prods, Product, Sends, LocalProd} = require('../models/model')
 const formidable = require('formidable')
 const path = require('path')
-const fs = require('fs')
-const {uploadToken, qnupurl, domain} = require('../utils/qiniu')
+// const fs = require('fs')
+// const {uploadToken, qnupurl, domain} = require('../utils/qiniu')()
+const qnfun = require('../utils/qiniu')
 
 module.exports = {
   // 注册
@@ -48,11 +49,17 @@ module.exports = {
     }
   },
   gettoken: (req, res, next) => {
+    const data = qnfun()
     res.status(200).json({
-      token: uploadToken,
-      domain: domain,
-      upUrl: qnupurl
+      token: data.uploadToken,
+      domain: data.domain,
+      upUrl: data.qnupurl
     })
+    // res.status(200).json({
+    //   token: uploadToken,
+    //   domain: domain,
+    //   upUrl: qnupurl
+    // })
   },
   // 上传图片
   upload: (req, res, next) => {
@@ -85,6 +92,12 @@ module.exports = {
     console.log(req.query)
     const result = await LocalProd.find().sort(JSON.parse(order)).limit(parseInt(limit)).skip(skip * limit).exec()
     res.status(200).json(result)
+  },
+  // 获取一个批发商品
+  culLocalProd: async (req, res, next) => {
+    const {id} = req.value.query
+    const cullocalprod = await LocalProd.findById(id)
+    res.status(200).json(cullocalprod)
   },
   // 新增待发货
   newpresend: async (req, res, next) => {

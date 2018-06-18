@@ -8,19 +8,38 @@ const accessKey = 'YOXpF0XvM_3yVDsz5C-hWwrFE5rtDAUQC3XjBQEG'
 const secretKey = 'CmrhUV2xHf1d8nPCsws9wwm7jKypCPA0lRVm-7lS'
 const domain = 'p79iy6oha.bkt.clouddn.com'
 const qnupurl = 'https://up-z2.qiniup.com'
-const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
-const options = {
-  scope: 'consignment',
-  expires: 21600
-}
-const putPolicy = new qiniu.rs.PutPolicy(options)
-const uploadToken = putPolicy.uploadToken(mac)
+// old
+// const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
+// const options = {
+//   scope: 'consignment',
+//   expires: 21600
+// }
+// const putPolicy = new qiniu.rs.PutPolicy(options)
+// const uploadToken = putPolicy.uploadToken(mac)
 
-module.exports = {
-  uploadToken,
-  domain,
-  qnupurl
+// module.exports = {
+//   uploadToken,
+//   domain,
+//   qnupurl
+// }
+// new
+module.exports = () => {
+  // 创建上传凭证
+  const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
+  const options = {
+    scope: 'consignment',
+    expires: 21600
+  }
+  const putPolicy = new qiniu.rs.PutPolicy(options)
+  const uploadToken = putPolicy.uploadToken(mac)
+  return {
+    uploadToken,
+    domain,
+    qnupurl
+  }
 }
+
+// third
 // /**
 //  * 
 //  * 构建一个七牛云上传凭证类
