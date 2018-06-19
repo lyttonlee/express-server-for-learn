@@ -18,7 +18,7 @@ connection.on('error',err => {
   }
 })
 connection.on('open', () => {  
-  console.log('opened MongoDB')
+  console.log('已成功连接到数据库！')
 })
 
 
@@ -62,10 +62,8 @@ app.use((err, req, res, next) => {
   console.error(err)
 })
 // listen port
-const serverPort = 8088
-const port = serverPort
-app.listen(port, () => {
-  // console.log(err)
-  console.log('your server are listening on port:' + port)
+const port = 8088
+const host = '0.0.0.0'
+app.listen(port, host, () => {
+  console.log(`the server is listening on ${host}:${port}`)
 })
-
