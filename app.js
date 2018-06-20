@@ -25,6 +25,7 @@ connection.on('open', () => {
 // routes
 const route = require('./routes/route')
 const adminroute = require('./routes/adminroute')
+const wxRouter = require('./routes/wxroute')
 // app
 const app = express()
 
@@ -40,8 +41,10 @@ app.use(bodyParser.json())
 // routes
 const client = '/api'
 const admin = '/api/admin'
+const wx = '/wxapi'
 app.use(client, route)
 app.use(admin, adminroute)
+app.use(wx, wxRouter)
 
 
 // catch 404 err and then to err handler
