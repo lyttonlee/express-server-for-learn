@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
 })
 // listen port
 const port = 8088
-// const host = '0.0.0.0'
+const host = '0.0.0.0'
 app.listen(port, host, () => {
-  console.log(`the server is listening on localhost:${port}`)
+  console.log(`the server is listening on ${host}:${port}`)
 })
